@@ -13,7 +13,7 @@ account = 'Enter yuor account number'
 acno=''
 pswd=''
   //database- bank
-  userDetails = {
+  userDetails:any = {
     1000:{acno:1000,username:'Neer',password:1000,balance:50000},
     1001:{acno:1001,username:'Devika',password:1001,balance:4000},
     1002:{acno:1002,username:'Ammu',password:1002,balance:6000}
@@ -38,8 +38,41 @@ pswd=''
 
 //user defined function- should at the end of class
 //(click)="login()"- in login.component.html
-login(){
-  alert('login clicked')
-}
 
+// login(){
+//   //alert('login clicked')
+
+//   var acno=this.acno
+//   var pswd=this.pswd
+
+//   let userDetails=this.userDetails
+//   if(acno in userDetails){
+//     if(pswd==userDetails[acno]['password']){
+//       alert('login successfull')
+//     }else{
+//       alert('incorrect password')
+//     }
+//   }else{
+//     alert('user dsnt exist!!!!!!!!!')
+//   }
+// }
+
+//
+login(a:any,p:any){
+  //alert('login clicked')
+
+  var acno=a.acno
+  var pswd=p.pswd
+
+  let userDetails=this.userDetails
+  if(acno in userDetails){
+    if(pswd==userDetails[acno]['password']){
+      alert('login successfull')
+    }else{
+      alert('incorrect password')
+    }
+  }else{
+    alert('user dsnt exist!!!!!!!!!')
+  }
+}
 }
