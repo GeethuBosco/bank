@@ -28,16 +28,21 @@ export class RegisterComponent implements OnInit {
   var acno = this.registerForm.value.acno
   var pswd = this.registerForm.value.pswd
   if(this.registerForm.valid){
-    const result = this.ds.register(acno,uname,pswd)
-  if(result){
-    alert('Successfully registered!!!')
-    this.router.navigateByUrl('')
+    //register- dataservice-asynchronous
+    this.ds.register(acno,uname,pswd)
+    .subscribe(
+      (result:any)=>{
+        alert(result.message)
+        this.router.navigateByUrl('')
+      },
+      result=>{
+        alert(result.error.message)
+        this.router.navigateByUrl('')
+      }
+    )
   }
-  else{
-    alert('User already exist.... please Login')
-    this.router.navigateByUrl('')
-  }
-  }
+  
+  
   else{
     alert('invalid input')
   }

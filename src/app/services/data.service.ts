@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 @Injectable({
@@ -17,7 +18,7 @@ export class DataService {
     1002: { acno: 1002, username: 'Ammu', password: 1002, balance: 6000,transaction:[]}
 
   }
-  constructor() { 
+  constructor(private http:HttpClient) { 
     this.getDetails()
   }
   saveDetails(){
@@ -47,45 +48,65 @@ export class DataService {
   }
   //register
   register(acno: any, username: any, password: any) {
-    let userDetails = this.userDetails
-    if (acno in userDetails) {
-      return false
-    }
-    else {
-      userDetails[acno] = {
-        acno,
-        username,
-        password,
-        balance: 0,
-        transaction:[]
-      }
-      this.saveDetails()
+    // let userDetails = this.userDetails
+    // if (acno in userDetails) {
+    //   return false
+    // }
+    // else {
+    //   userDetails[acno] = {
+    //     acno,
+    //     username,
+    //     password,
+    //     balance: 0,
+    //     transaction:[]
+    //   }
+    //   this.saveDetails()
   
-      console.log(userDetails);
-      return true
+    //   console.log(userDetails);
+    //   return true
+    // }
+
+
+    //req body
+    const data={
+      acno,
+      username,
+      password
     }
+    //register api - asynchronous
+    return this.http.post(
+      'http://localhost:3000/register',data
+    )
   }
 
 
   //login
   login(acno: any, pswd: any) {
-    let userDetails = this.userDetails
-    if (acno in userDetails) {
-      if (pswd == userDetails[acno]['password']) {
-        this.currentUser = userDetails[acno]['username']
-        this.currentAcno = acno
-        this.saveDetails()
-        return true
-      }
-      else {
-        alert('incorrect password')
-        return false
-      }
+    //let userDetails = this.userDetails
+    // if (acno in userDetails) {
+    //   if (pswd == userDetails[acno]['password']) {
+    //     this.currentUser = userDetails[acno]['username']
+    //     this.currentAcno = acno
+    //     this.saveDetails()
+    //     return true
+    //   }
+    //   else {
+    //     alert('incorrect password')
+    //     return false
+    //   }
+    // }
+    // else {
+    //   alert('user doesnot exist!!!!!!!!!')
+    //   return false
+    // }
+    const data={
+      acno,
+      pswd
     }
-    else {
-      alert('user doesnot exist!!!!!!!!!')
-      return false
-    }
+    //login api - asynchronous
+    return this.http.post(
+      'http://localhost:3000/login',data
+    )
   }
   //deposit
   deposit(acno: any, pswd: any, amt: any) {

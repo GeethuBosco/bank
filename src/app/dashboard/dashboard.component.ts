@@ -32,8 +32,10 @@ export class DashboardComponent implements OnInit {
 
   //share to child
   acno:any
+  sDetails:any
   constructor(private router:Router ,private fb:FormBuilder,private ds: DataService) { 
     this.user = this.ds.currentUser
+    this.sDetails=new Date()
   }
 
   ngOnInit(): void {
@@ -83,5 +85,7 @@ export class DashboardComponent implements OnInit {
   deleteparent(){
     this.acno = JSON.parse(localStorage.getItem('currentAcno') || '')
   }
-
+  onCancel(){
+    this.acno=''
+  }
 }

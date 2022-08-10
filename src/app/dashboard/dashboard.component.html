@@ -12,8 +12,9 @@
 <input type="submit"  value="Delete" class="btn btn-danger float-right " (click)="deleteparent()"
     style="width:10%">
 <a routerLink='/transaction'>View transaction History</a>
+<h5 style="color: white;">System data anad time : {{sDetails | date:'short'}}</h5>
 <!-- child deleteconfirm -->
-<app-deleteconfirm [item]="acno" ></app-deleteconfirm>
+<app-deleteconfirm (onCancel)="onCancel()" [item]="acno"></app-deleteconfirm>
 
 
 <div [ngClass]="acno?'style1':'' " class="container col-md-12 mt-0">
